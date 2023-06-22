@@ -1,0 +1,1 @@
+(*variables liées + scope + mode, graphes de dépendance*)

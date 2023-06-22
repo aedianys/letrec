@@ -1,0 +1,8 @@
+(ocamllex
+ (modules lexer))
+(menhir
+ (modules parser))
+(executable
+(preprocess (pps ppx_deriving.show))
+ (name recml)
+ (flags (:standard -w -8-26-27-30-32-33)))

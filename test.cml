@@ -1,0 +1,4 @@
+new z and y and x
+in set x <- (Tree (List ((print_endline "effect"; y; z)))); set y <- (Tree (print_endline "effect"; List ())); set z <- (Tree (print_endline "effect"; List ((x)))); match (z, y, x) with
+| Tree (List (y1, z1), Tree (List , Tree List (x1))) -> assert y1 == y; assert z1 == z; assert x1 == x
+| _ -> assert false;;
