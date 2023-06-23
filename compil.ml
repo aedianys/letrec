@@ -162,6 +162,7 @@ let rec print_exp ff = function
     fprintf ff "set %a <- (%a)" print_pattern p print_exp e
 
 and print_binding ff vb =
+  (*debug:*) 
   fprintf ff "%a %a %a= %a" print_sd vb.sd
   print_pattern vb.vb_pat
     (print_list pp_print_string "" " " " ") vb.vb_args
@@ -169,8 +170,8 @@ and print_binding ff vb =
 
 and print_pattern_matching ff mat =
   let print_row ff (p,e) =
-    fprintf ff "| %a -> %a" print_pattern p print_exp e in
-  fprintf ff "%a" (print_list print_row "" "\n" "") mat
+    fprintf ff "| %a -> %a@." print_pattern p print_exp e in
+  fprintf ff "%a" (print_list print_row "" "" "") mat
 
 and print_pattern ff = function
   | Tpat_any -> fprintf ff "_"

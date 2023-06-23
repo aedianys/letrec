@@ -1,4 +1,4 @@
-(*let rec x = (x; ());;
+let rec x = (x; ());;
 
 let rec x = "x";;
 
@@ -31,7 +31,7 @@ let rec x =
   let a = x in
   fun () -> a ()
 and y = [x];;
-*)
+
 
 let rec x = Tree [(print_endline "effect"; y); z]
 and y = Tree (print_endline "effect"; [])
@@ -45,3 +45,19 @@ match (x, y, z) with
   | _ ->
     assert false
 ;;
+
+let rec f =
+  match 0 with
+  | 0 ->
+    (function
+    | 0 -> 0
+    | n -> f (n - 1))
+  | _ -> assert false
+
+in let x = f 1;;
+
+let rec x =
+  let y = match false with 
+    | true -> x
+    | false -> 0 in
+  Constr y;;
