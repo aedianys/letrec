@@ -122,9 +122,9 @@ list_elmts_exp:
 
 exp_list:
 | es = exp_list COMMA e = exp
-  { (e::es) }
+  { List.rev (e::(List.rev es)) }
 | e1 = exp COMMA e2 = exp
-  { [e2;e1] }
+  { [e1;e2] }
 ;
 
 constant:
