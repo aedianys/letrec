@@ -1,3 +1,8 @@
+let rec func = fun x -> func (x, stat)
+and cst = let x = stat in 42
+and stat = List (666,stat)
+and dyn = head ["a"] ;;
+
 let rec x = (x; ());;
 
 let rec x = "x";;

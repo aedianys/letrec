@@ -1,12 +1,22 @@
+let *dynamics* dyn = head List (("a"))
+in new stat;
+let *constants* cst = let *dynamics* x = _uninspectable
+in 42
+in let rec *functions* func = fun x -> func (x, stat)
+in set stat <- (List ((666, stat))); ();;
+
 let *constants* x = _uninspectable; ();;
 
 let *constants* x = "x";;
 
-let *constants* x = let *constants* y = () in y;;
+let *constants* x = let *constants* y = ()
+in y;;
 
-let *constants* x = let *constants* y = x; () in y;;
+let *constants* x = let *constants* y = _uninspectable; ()
+in y;;
 
-let *dynamics* x = let *constants* y = () in x;;
+let *dynamics* x = let *constants* y = ()
+in x;;
 
 let *dynamics* y _ = ()
 and *dynamics* x = y 0;;
@@ -14,28 +24,37 @@ and *dynamics* x = y 0;;
 let *dynamics* y = ()
 and *dynamics* x = y;;
 
-let *dynamics* x = let *dynamics* y = x in y;;
+let *dynamics* x = let *dynamics* y = x
+in y;;
 
-new x
-in set x <- (A (x)); ();;
+new x;
+set x <- (A (x)); ();;
 
-let rec *functions* r = fun *id -> new x
-in let rec *functions* y = fun () -> x in set x <- (A (r)); y *id;;
+let rec *functions* r = fun *id -> new x;
+let rec *functions* y = fun () -> x
+in set x <- (A (r)); y *id;;
 
-let *dynamics* y = ignore x; 0 in new x
-in set x <- (A (x)); ();;
+let *dynamics* y = ignore x; 0
+in new x;
+set x <- (A (x)); ();;
 
-new x
-in let *constants* y = let *constants* x = () in _uninspectable in set x <- (List ((y))); ();;
+new x;
+let *constants* y = let *constants* x = ()
+in _uninspectable
+in set x <- (List ((y))); ();;
 
-new x
-in let *constants* y = let *constants* x = () in _uninspectable in set x <- (List ((y))); ();;
+new x;
+let *constants* y = let *constants* x = ()
+in _uninspectable
+in set x <- (List ((y))); ();;
 
-new y
-in let rec *functions* x = fun *id -> let *dynamics* a = x in fun () -> a () *id in set y <- (List ((x))); ();;
+new y;
+let rec *functions* x = fun *id -> let *dynamics* a = x
+in fun () -> a () *id
+in set y <- (List ((x))); ();;
 
-new z and y and x
-in set x <- (Tree (List ((print_endline "effect"; y; z)))); set y <- (Tree (print_endline "effect"; List ())); set z <- (Tree (print_endline "effect"; List ((x)))); match (z, y, x) with
+new z and y and x;
+set x <- (Tree (List ((print_endline "effect"; y; z)))); set y <- (Tree (print_endline "effect"; List ())); set z <- (Tree (print_endline "effect"; List ((x)))); match (x, y, z) with
 | Tree (List (y1, z1), Tree (List , Tree List (x1))) -> assert y1 == y; assert z1 == z; assert x1 == x
 | _ -> assert false
 ;;
@@ -46,10 +65,12 @@ let *dynamics* f = match 0 with
 | n -> f n - 1
 
 | _ -> assert false
- in let *dynamics* x = f 1;;
 
-new x
-in set x <- (let *dynamics* y = match false with
+in let *dynamics* x = f 1;;
+
+new x;
+set x <- (let *dynamics* y = match false with
 | true -> x
 | false -> 0
- in Constr (y)); ();;
+
+in Constr (y)); ();;
