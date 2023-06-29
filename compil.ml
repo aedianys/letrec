@@ -7,7 +7,9 @@ let eta_expand = function
 
 let rec uninspectable set = function
   | Texp_let (rec_flag, bindings, body) ->
-    Texp_let (rec_flag, bindings, uninspectable set body)
+    let bindings' = List.map
+      (fun vb -> {vb with vb_expr= uninspectable set vb.vb_expr}) bindings in
+    Texp_let (rec_flag, bindings', uninspectable set body)
 
   | Texp_uminus e -> Texp_uminus (uninspectable set e)
 
@@ -120,7 +122,7 @@ let rec print_exp ff = function
   | Texp_let (rec_flag, bindings, body) ->
     let _rec = if rec_flag then "rec " else "" in
     if body <> (Texp_constant Tconst_unit) then
-      fprintf ff "let %s%a in %a" _rec
+      fprintf ff "let %s%a@.in %a" _rec
         (print_list print_binding "" "\nand " "") bindings
         print_exp body
     else
@@ -154,7 +156,7 @@ let rec print_exp ff = function
   | Texp_sequence (e1,e2) -> fprintf ff "%a; %a" print_exp e1 print_exp e2
 
   | Texp_new (pl,body) ->
-    fprintf ff "new %a@.in %a"
+    fprintf ff "new %a;@.%a"
       (print_list print_pattern "" " and " "") pl
       print_exp body
   
